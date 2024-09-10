@@ -18,7 +18,7 @@
 			</div>
 			<div class="nova-hero_title">
 				<p>Your Strategic Growth Partner</p>
-				<p>And Web3 Cmoabout Nova Strategy</p>
+				<p>And Web3 CMO about Nova Strategy</p>
 			</div>
 		</div>
 		<div class="nova-about">
@@ -67,11 +67,12 @@
 			<div class="nova-devide"></div>
 			<div class="nova-partners_group">
 				<div class="group-item" v-for="item in partnerList">
-					<img
+					<!-- <img
 						:src="`src/assets/banner.jpg`"
 						style="width: 85px; height: 30px"
 						alt=""
-					/>
+					/> -->
+					<div class="group-item_banner"></div>
 				</div>
 			</div>
 		</div>
@@ -401,6 +402,14 @@ const handleServiceToggle = (item) => {
 	margin: 0 auto;
 }
 
+.group-item_banner {
+	width: 85px;
+	height: 30px;
+	background-image: url("../assets/banner.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
 .nova-partners_group > div {
 	width: 220px;
 	height: 95px;
@@ -538,25 +547,25 @@ textarea {
 .service1 {
 	width: 48px;
 	height: 48px;
-	background-image: url("src/assets/service1.jpg");
+	background-image: url("../assets/service1.jpg");
 	margin-bottom: 20px;
 }
 .service2 {
 	width: 48px;
 	height: 48px;
-	background-image: url("src/assets/service2.jpg");
+	background-image: url("../assets/service2.jpg");
 	margin-bottom: 20px;
 }
 .service3 {
 	width: 48px;
 	height: 48px;
-	background-image: url("src/assets/service3.jpg");
+	background-image: url("../assets/service3.jpg");
 	margin-bottom: 20px;
 }
 .service4 {
 	width: 48px;
 	height: 48px;
-	background-image: url("src/assets/service4.jpg");
+	background-image: url("../assets/service4.jpg");
 	margin-bottom: 20px;
 }
 </style>
