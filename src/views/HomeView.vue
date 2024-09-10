@@ -8,7 +8,7 @@
 				<li>About</li>
 			</ul>
 			<div class="nova-nav_button">
-				<button>Contact Us</button>
+				<button @click="scrollToSection">Contact Us</button>
 			</div>
 		</nav>
 		<nav class="nova-devide"></nav>
@@ -76,7 +76,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="nova-form">
+		<div class="nova-form" ref="novaform">
 			<div class="nova-form_title">
 				<p>Social Media & <br />Community Matrix</p>
 			</div>
@@ -117,12 +117,67 @@
 				</form>
 			</div>
 		</div>
-		<footer class="nova-footer">footer</footer>
+		<div class="nova-devide"></div>
+		<footer class="nova-footer">
+			<div class="nova-footer_contact">
+				<div class="nova-footer_contact-title"></div>
+				<div class="nova-footer_contact-detail">
+					<div class="contact-detail_item twitter"></div>
+					<div class="contact-detail_item youtube"></div>
+					<div class="contact-detail_item telegram"></div>
+					<div class="contact-detail_item ins"></div>
+				</div>
+			</div>
+			<div class="nova-footer_link">
+				<div class="footer-link_item">
+					<div class="footer-link_item-title">Company</div>
+					<div class="footer-link_item-link">Home</div>
+					<div class="footer-link_item-link">About</div>
+					<div class="footer-link_item-link">Pricing</div>
+					<div class="footer-link_item-link">FAQ</div>
+					<div class="footer-link_item-link">Review</div>
+					<div class="footer-link_item-link">Contact</div>
+				</div>
+				<div class="footer-link_item">
+					<div class="footer-link_item-title">Product</div>
+					<div class="footer-link_item-link">AI Assistant</div>
+					<div class="footer-link_item-link">Funnels</div>
+					<div class="footer-link_item-link">Exit Intent</div>
+					<div class="footer-link_item-link">Popups</div>
+					<div class="footer-link_item-link">Automation</div>
+					<div class="footer-link_item-link">Personalization</div>
+				</div>
+				<div class="footer-link_item">
+					<div class="footer-link_item-title">Benefits</div>
+					<div class="footer-link_item-link">Sales</div>
+					<div class="footer-link_item-link">Customers</div>
+					<div class="footer-link_item-link">Leads</div>
+					<div class="footer-link_item-link">Growth</div>
+					<div class="footer-link_item-link">Marketing</div>
+					<div class="footer-link_item-link">SEO</div>
+					<div class="footer-link_item-link">Search</div>
+				</div>
+				<div class="footer-link_item">
+					<div class="footer-link_item-title">Members</div>
+					<div class="footer-link_item-link">Account</div>
+					<div class="footer-link_item-link">Community</div>
+					<div class="footer-link_item-link">Resources</div>
+					<div class="footer-link_item-link">Terms</div>
+					<div class="footer-link_item-link">Privacy</div>
+				</div>
+			</div>
+		</footer>
+		<div class="nova-devide"></div>
+		<div class="copyright">
+			Copyright 2024 nova strategy · All rights reserved ·
+			<span @click="returnToTop">Return to Top</span>
+		</div>
 	</main>
 </template>
 
 <script setup>
-import { reactive, onMounted, onUnmounted } from "vue";
+import { ref, reactive, onMounted, onUnmounted } from "vue";
+const novaform = ref(null);
 
 const serviceList = reactive([
 	{
@@ -200,6 +255,24 @@ const handleServiceToggle = (item) => {
 		if (item.title === service.title) {
 			service.active = true;
 		}
+	});
+};
+
+const scrollToSection = () => {
+	novaform.value.scrollIntoView({
+		behavior: "smooth", // 平滑滚动
+		block: "start", // 滚动到目标元素的顶部
+	});
+};
+
+/**
+ * Returns the user to the top of the page.
+ * @return {void}
+ */
+const returnToTop = () => {
+	window.scrollTo({
+		top: 0,
+		behavior: "smooth", // 平滑滚动
 	});
 };
 </script>
@@ -433,12 +506,12 @@ const handleServiceToggle = (item) => {
 
 .nova-form {
 	margin-top: 40px;
+	margin-bottom: 40px;
 	text-align: center;
 	color: #fff;
 	width: 100%;
 	height: 763px;
 	background-image: url("../assets/form-bg.jpg");
-
 	background-repeat: no-repeat;
 	background-size: contain;
 }
@@ -567,5 +640,84 @@ textarea {
 	height: 48px;
 	background-image: url("../assets/service4.jpg");
 	margin-bottom: 20px;
+}
+.nova-footer {
+	padding: 80px 160px 20px;
+	box-sizing: border-box;
+	display: flex;
+}
+.nova-footer_contact {
+	width: 35%;
+}
+.nova-footer_contact-title {
+	width: 85px;
+	height: 30px;
+	background-image: url("../assets/banner.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+.nova-footer_contact-detail {
+}
+.nova-footer_link {
+	width: 65%;
+	display: flex;
+	justify-content: space-between;
+}
+.footer-link_item-title {
+	font-size: 17px;
+	color: #fff;
+	font-weight: 500;
+	margin-bottom: 20px;
+}
+.footer-link_item-link {
+	font-size: 16px;
+	margin-bottom: 20px;
+	color: #888;
+}
+.nova-footer_contact-detail {
+	display: flex;
+	margin-top: 20px;
+	margin-left: -5px;
+}
+.contact-detail_item {
+	width: 30px;
+	height: 30px;
+	margin-right: 10px;
+	/* background: #944efc; */
+	border: 1px solid #944efc;
+	border-radius: 30px;
+	font-size: 15px;
+	color: #d8d8d8;
+	cursor: pointer;
+	background-color: #020014; /* 背景色是渐变的起始色 */
+	box-shadow: 0 0 5px 2px #944efc inset; /* 渐变效果：从外到内 */
+	transition: box-shadow 0.3s ease; /* 平滑过渡效果 */
+
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.contact-detail_item.twitter {
+	background-image: url(../assets/icon-twitter.jpg);
+	background-size: 10px;
+}
+.contact-detail_item.youtube {
+	background-image: url(../assets/icon-youtube.jpg);
+	background-size: 12px;
+}
+.contact-detail_item.telegram {
+	background-image: url(../assets/icon-telegram.jpg);
+	background-size: 12px;
+}
+.contact-detail_item.ins {
+	background-image: url(../assets/icon-ins.jpg);
+	background-size: 12px;
+}
+.copyright {
+	width: 100%;
+	text-align: center;
+	padding: 10px 0;
+}
+.copyright > span {
+	cursor: pointer;
 }
 </style>
