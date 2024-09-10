@@ -1,0 +1,562 @@
+<template>
+	<main>
+		<nav class="nova-nav">
+			<div class="nova-nav_logo"></div>
+			<ul class="nova-nav_list">
+				<li>Home</li>
+				<li>Services & Offerings</li>
+				<li>About</li>
+			</ul>
+			<div class="nova-nav_button">
+				<button>Contact Us</button>
+			</div>
+		</nav>
+		<nav class="nova-devide"></nav>
+		<div class="nova-hero">
+			<div class="nova-hero_banner">
+				<img src="../assets/hero-banner2.jpg" alt="" />
+			</div>
+			<div class="nova-hero_title">
+				<p>Your Strategic Growth Partner</p>
+				<p>And Web3 Cmoabout Nova Strategy</p>
+			</div>
+		</div>
+		<div class="nova-about">
+			<div class="nova-about_title">
+				<p>About Nova</p>
+			</div>
+			<div class="nova-about_detail">
+				We're dedicated to amplifying the success of Web3 projects and exchanges
+				worldwide. We understand that one size doesn't fit all. Our expert team
+				crafts bespoke strategies tailored to the unique characteristics and
+				needs of each project. Whether it's boosting user growth, expanding
+				market reach, increasing TVL, or maximizing ROl, we're committed to
+				delivering results that exceed expectations. Think of us as your
+				in-house CMO, but better. With our unparalleled industry expertise and a
+				proven track record of success, we've empowered countless exchanges and
+				projects to achieve remarkable growth.
+			</div>
+		</div>
+		<div class="nova-desc"></div>
+		<div class="nova-service">
+			<div class="nova-service_title">
+				<p>Our Services</p>
+			</div>
+			<ul class="nova-service_list">
+				<li
+					class="list-item"
+					:class="item.active ? 'active' : ''"
+					@click="handleServiceToggle(item)"
+					v-for="item of serviceList"
+				>
+					<div class="list-item_logo" :class="`service${item.logo}`"></div>
+					<div class="list-item_title">{{ item.title }}</div>
+
+					<div class="list-item_child" v-if="item.active">
+						<p v-for="(service, index) in item.childrenList" :key="index">
+							{{ service.text }}
+						</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="nova-partners">
+			<div class="nova-partners_title">
+				<p>Partners</p>
+			</div>
+			<div class="nova-devide"></div>
+			<div class="nova-partners_group">
+				<div class="group-item" v-for="item in partnerList">
+					<img
+						:src="`src/assets/banner.jpg`"
+						style="width: 85px; height: 30px"
+						alt=""
+					/>
+				</div>
+			</div>
+		</div>
+		<div class="nova-form">
+			<div class="nova-form_title">
+				<p>Social Media & <br />Community Matrix</p>
+			</div>
+			<div class="nova-form_container">
+				<form class="nova-form_container-form">
+					<div class="form-row">
+						<div class="form-group">
+							<input type="text" id="first-name" placeholder="First Name" />
+						</div>
+						<div class="form-group">
+							<input type="text" id="last-name" placeholder="Last Name" />
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="form-group">
+							<input
+								type="text"
+								id="telegram"
+								placeholder="Telegram Username"
+							/>
+						</div>
+						<div class="form-group">
+							<input type="email" id="email" placeholder="xxxxx@gmail.com" />
+						</div>
+					</div>
+
+					<div class="form-row full-width">
+						<textarea
+							placeholder="Please enter your questions or suggestions for us and we will contact you after receiving the information."
+						></textarea>
+						<div class="word-count">Number of words: 1000</div>
+					</div>
+
+					<div class="form-row button-row">
+						<button type="submit" class="submit-button">Contact Us</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<footer class="nova-footer">footer</footer>
+	</main>
+</template>
+
+<script setup>
+import { reactive, onMounted, onUnmounted } from "vue";
+
+const serviceList = reactive([
+	{
+		logo: "1",
+		title: "Strategy Consulting Service",
+		active: true,
+		childrenList: [
+			{ logo: 1, text: "Community Building and Management" },
+			{ logo: 2, text: "Ecosystem Support" },
+			{ logo: 3, text: "Partnerships and Alliances" },
+			{ logo: 4, text: "140+ Media House Globally" },
+			{ logo: 5, text: "Marketing and Brand Promotion" },
+			{ logo: 6, text: "Governance and Incentive Mechanisms" },
+			{ logo: 7, text: "Security and Compliance" },
+		],
+	},
+	{
+		logo: "2",
+		active: false,
+		title: "Consulting Service",
+		childrenList: [
+			{ logo: 1, text: "Community Building and Management" },
+			{ logo: 2, text: "Ecosystem Support" },
+			{ logo: 3, text: "Partnerships and Alliances" },
+			{ logo: 4, text: "140+ Media House Globally" },
+			{ logo: 5, text: "Marketing and Brand Promotion" },
+			{ logo: 6, text: "Governance and Incentive Mechanisms" },
+			{ logo: 7, text: "Security and Compliance" },
+		],
+	},
+	{
+		logo: "3",
+		active: false,
+		title: "Selected Global Kols & Communities",
+		childrenList: [
+			{ logo: 1, text: "Over 1800+ Influencers" },
+			{ logo: 2, text: "Reach 20M+ Audiences" },
+			{ logo: 3, text: "100+ Web3 Communities" },
+			{
+				logo: 4,
+				text: "Cover 34+ Major Countries ( Eglish, Greater China, South Korea, Japan, SEA, South Asia, Korea, LATAM, Turkey, Europe, CIS, more…)",
+			},
+		],
+	},
+	{
+		logo: "4",
+		active: false,
+		title: "Listing & Fundraising",
+		childrenList: [
+			{ logo: 1, text: "Reach TOP Exchanges For Token Listing" },
+			{ logo: 2, text: "5+ TOP VCs" },
+			{ logo: 3, text: "180B+ Trading Volume Generated" },
+		],
+	},
+]);
+
+const partnerList = reactive([
+	{ item: "1", logo: "nova" },
+	{ item: "2", logo: "nova" },
+	{ item: "3", logo: "nova" },
+	{ item: "4", logo: "nova" },
+	{ item: "5", logo: "nova" },
+	{ item: "6", logo: "nova" },
+	{ item: "7", logo: "nova" },
+	{ item: "8", logo: "nova" },
+	{ item: "9", logo: "nova" },
+	{ item: "10", logo: "nova" },
+	{ item: "11", logo: "nova" },
+	{ item: "12", logo: "nova" },
+]);
+
+const handleServiceToggle = (item) => {
+	serviceList.forEach((service) => {
+		service.active = false;
+		if (item.title === service.title) {
+			service.active = true;
+		}
+	});
+};
+</script>
+
+<style scoped>
+.nova-nav {
+	position: relative;
+	height: 75px;
+	text-align: center;
+	line-height: 75px;
+	display: flex;
+	align-items: center;
+	padding: 0 30px;
+	box-sizing: border-box;
+	justify-content: space-between;
+}
+.nova-nav_logo {
+	width: 85px;
+	height: 30px;
+	background-image: url("../assets/banner.jpg");
+	background-size: cover;
+}
+.nova-nav_list {
+	color: #d8d8d8;
+	display: flex;
+	width: 320px;
+	justify-content: space-between;
+}
+.nova-nav_list > li {
+	list-style-type: none;
+	cursor: pointer;
+}
+.nova-nav_button > button {
+	width: 120px;
+	height: 36px;
+	/* background: #944efc; */
+	border: 1px solid #944efc;
+	border-radius: 36px;
+	font-size: 15px;
+	color: #d8d8d8;
+	cursor: pointer;
+	background: #020014; /* 背景色是渐变的起始色 */
+	box-shadow: 0 0 20px 5px #944efc inset; /* 渐变效果：从外到内 */
+	transition: box-shadow 0.3s ease; /* 平滑过渡效果 */
+}
+.nova-devide {
+	width: 100%;
+	height: 1px;
+	background-image: url("../assets/banner-line.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+.nova-hero {
+	height: 750px;
+	background-image: url("../assets/hero-banner.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: bottom;
+	padding-top: 100px;
+	text-align: center;
+	color: #fff;
+}
+.nova-hero_banner {
+	margin-bottom: 30px;
+}
+.nova-hero_title {
+	margin-bottom: 50px;
+	font-size: 42px;
+	font-weight: 900;
+}
+.nova-hero_title > p {
+	font-weight: 600;
+}
+.nova-about {
+	/* height: 750px; */
+	margin-top: -150px;
+	text-align: center;
+	color: #fff;
+}
+.nova-about_title {
+	margin-bottom: 20px;
+	font-size: 42px;
+}
+.nova-about_title > p {
+	font-weight: 400;
+}
+.nova-about_detail {
+	color: #d8d8d8;
+	font-size: 14px;
+	width: 880px;
+	margin: 0 auto;
+}
+.nova-desc {
+	margin-top: 150px;
+	width: 100%;
+	height: 560px;
+	background-image: url("../assets/choose.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+}
+.nova-service {
+	margin-top: 40px;
+	margin-bottom: 100px;
+	text-align: center;
+	color: #fff;
+}
+.nova-service_title {
+	margin-bottom: 20px;
+	font-size: 42px;
+}
+.nova-service_title > p {
+	font-weight: 400;
+}
+.nova-service_list {
+	display: flex;
+	gap: 10px;
+	justify-content: center;
+	padding: 0;
+	margin: 0;
+}
+
+.nova-service_list > li {
+	list-style-type: none;
+	cursor: pointer;
+	width: 150px;
+	height: 460px;
+	font-size: 18px;
+	font-weight: 400;
+	background-image: url("../assets/service-container.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	border-radius: 20px;
+	display: flex;
+	flex-direction: column;
+	padding: 40px 20px;
+	color: white;
+	/* transition: all 0.4s ease; */
+	position: relative;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.nova-service_list > li.active {
+	font-size: 32px;
+	font-weight: 600;
+	width: 650px;
+	height: 460px;
+	background-image: url("../assets/service-active.jpg");
+	background-size: 100%;
+	padding: 40px;
+	box-sizing: border-box;
+}
+
+.list-item_logo img {
+	width: 40px;
+	height: 40px;
+}
+
+.list-item_title {
+	text-align: left;
+	margin-bottom: 10px;
+}
+
+.list-item_child {
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	font-size: 14px;
+	color: #ccc;
+	line-height: 1.6;
+	text-align: left;
+}
+
+.nova-service_list > li.active .list-item_child {
+	opacity: 1; /* 在激活时显示子元素内容 */
+}
+
+.list-item_child p {
+	margin: 5px 0;
+}
+
+.nova-partners {
+	margin-top: 40px;
+	margin-bottom: 120px;
+	text-align: center;
+	color: #fff;
+}
+.nova-partners_title {
+	margin-bottom: 20px;
+	font-size: 42px;
+}
+.nova-partners_title > p {
+	font-weight: 400;
+}
+
+.nova-partners_group {
+	display: flex;
+	width: 1320px;
+	flex-wrap: wrap; /* 允许项目换行 */
+	justify-content: space-between; /* 为了在每行项目间分配空间 */
+	margin: 0 auto;
+}
+
+.nova-partners_group > div {
+	width: 220px;
+	height: 95px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-bottom: 1px solid rgba(216, 216, 216, 0.2);
+
+	box-shadow: 0 0 30px 1px rgba(255, 255, 255, 0.1); /* 外部渐变光晕 */
+	border: 2px solid transparent;
+	/* background-image: linear-gradient(white, white),
+		radial-gradient(
+			circle at center,
+			rgba(255, 255, 255, 0),
+			rgba(148, 78, 252, 0.5),
+			rgba(2, 0, 20, 1)
+		); */
+	background-origin: border-box;
+	background-clip: padding-box, border-box;
+}
+
+.nova-form {
+	margin-top: 40px;
+	text-align: center;
+	color: #fff;
+	width: 100%;
+	height: 763px;
+	background-image: url("../assets/form-bg.jpg");
+
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.nova-form_title {
+	margin-bottom: 20px;
+	font-size: 42px;
+}
+.nova-form_title > p {
+	font-weight: 400;
+	line-height: 48px;
+}
+
+.nova-form_container {
+	width: 900px;
+	height: auto;
+	background: #09041f;
+	background: linear-gradient(to top, #944efc, #09041f);
+	margin: 50px auto 0;
+	border-radius: 20px;
+	padding: 40px 30px;
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.nova-form_container-form {
+	display: flex;
+	flex-direction: column;
+}
+
+.form-row {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.form-group {
+	flex: 1;
+	margin-right: 20px;
+}
+
+.form-group:last-child {
+	margin-right: 0;
+}
+
+.form-group label {
+	display: block;
+	margin-bottom: 5px;
+	color: #ccc;
+}
+
+.form-group input {
+	width: 100%;
+	height: 50px;
+	padding: 10px;
+	background-color: rgba(24, 24, 40, 0.3);
+	border: none;
+	border-radius: 10px;
+	color: #fff;
+}
+
+textarea {
+	width: 100%;
+	height: 170px;
+	padding: 10px;
+	background-color: rgba(24, 24, 40, 0.3);
+	border: none;
+	border-radius: 10px;
+	color: #fff;
+	resize: none;
+}
+
+.word-count {
+	text-align: right;
+	color: #888;
+	font-size: 12px;
+	margin-top: 5px;
+}
+
+.button-row {
+	text-align: center;
+	/* margin-top: 20px; */
+	margin: 0 auto;
+}
+
+.submit-button {
+	background: #222;
+	border: none;
+	padding: 15px 30px;
+	border-radius: 50px;
+	color: white;
+	font-size: 14px;
+	cursor: pointer;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+	transition: all 0.3s ease;
+}
+
+.submit-button:hover {
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+	transform: translateY(-3px);
+}
+
+.full-width {
+	flex-direction: column;
+}
+
+.service1 {
+	width: 48px;
+	height: 48px;
+	background-image: url("src/assets/service1.jpg");
+	margin-bottom: 20px;
+}
+.service2 {
+	width: 48px;
+	height: 48px;
+	background-image: url("src/assets/service2.jpg");
+	margin-bottom: 20px;
+}
+.service3 {
+	width: 48px;
+	height: 48px;
+	background-image: url("src/assets/service3.jpg");
+	margin-bottom: 20px;
+}
+.service4 {
+	width: 48px;
+	height: 48px;
+	background-image: url("src/assets/service4.jpg");
+	margin-bottom: 20px;
+}
+</style>
