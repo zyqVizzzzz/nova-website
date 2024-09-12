@@ -92,7 +92,7 @@
 					<div class="list-item_logo" :class="`service${item.logo}`"></div>
 					<div class="list-item_title">{{ item.title }}</div>
 
-					<div class="list-item_child" v-if="item.active">
+					<div class="list-item_child" v-show="item.active">
 						<p v-for="(service, index) in item.childrenList" :key="index">
 							{{ service.text }}
 						</p>
@@ -293,7 +293,9 @@ const handleServiceToggle = (item) => {
 	serviceList.forEach((service) => {
 		service.active = false;
 		if (item.title === service.title) {
+			// setTimeout(() => {
 			service.active = true;
+			// }, 400);
 		}
 	});
 };
@@ -516,9 +518,16 @@ const returnToTop = () => {
 	flex-direction: column;
 	padding: 40px 20px;
 	color: white;
-	/* transition: all 0.4s ease; */
+	transition: all 0.4s ease;
 	position: relative;
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.nova-service_list > li[v-cloak] {
+	display: none;
+}
+[v-show] {
+	opacity: 1;
 }
 
 .nova-service_list > li.active {
@@ -544,11 +553,17 @@ const returnToTop = () => {
 
 .list-item_child {
 	opacity: 0;
-	transition: opacity 0.3s ease;
+	max-height: 0;
+	overflow: hidden;
+	transition: opacity 0.4s ease, max-height 0.4s ease;
 	font-size: 14px;
 	color: #ccc;
 	line-height: 1.6;
 	text-align: left;
+}
+.list-item.active .list-item_child {
+	opacity: 1;
+	max-height: 200px; /* 根据内容大小调整此值，或使用auto */
 }
 
 .nova-service_list > li.active .list-item_child {
