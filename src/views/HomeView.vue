@@ -14,7 +14,7 @@
 		<nav class="nova-devide"></nav>
 		<div class="nova-hero">
 			<div class="nova-hero_banner">
-				<img src="../assets/hero-banner2.jpg" alt="" />
+				<div class="nova-hero_banner-logo">N<span>O</span>VA STRATEGY</div>
 			</div>
 			<div class="nova-hero_title">
 				<p>Your Strategic Growth Partner</p>
@@ -37,7 +37,46 @@
 				projects to achieve remarkable growth.
 			</div>
 		</div>
-		<div class="nova-desc"></div>
+		<div class="nova-desc">
+			<div class="nova-about_title">
+				<p>Why Choose Us?</p>
+			</div>
+			<div class="nova-desc_center">
+				<div class="nova-desc_center-item">
+					<div class="center-item_content">
+						<div class="center-item_title">Experts in Growth and Marketing</div>
+						Premium influencer & media resources in more than
+						<span>34</span> major crypto markets. A wide selection of
+						<span>1800+</span> global premium influencers, reaching
+						<span>20M+</span> crypto audiences.
+					</div>
+				</div>
+				<div class="nova-desc_center-item">
+					<div class="center-item_content">
+						<div class="center-item_title">Extensive & Quality Outreach</div>
+						Premium influencer & media resources in more than
+						<span>34</span> major crypto markets. A wide selection of
+						<span>1800+</span> global premium influencers, reaching
+						<span>20M+</span> crypto audiences.
+					</div>
+				</div>
+				<div class="nova-desc_center-item">
+					<div class="center-item_content">
+						<div class="center-item_title">Industry Know-How</div>
+						we advise you on what is the best practices and the most
+						cost-efficient way to achieve your goal.
+					</div>
+				</div>
+				<div class="nova-desc_center-item">
+					<div class="center-item_content">
+						<div class="center-item_title">Top Notch Resources</div>
+						Industry top partners, global top exchanges, VCs, sport and
+						entertainment sponsorship resources etc.
+					</div>
+				</div>
+				<div class="nova-desc_center-logo">N<span>O</span>VA STRATEGY</div>
+			</div>
+		</div>
 		<div class="nova-service">
 			<div class="nova-service_title">
 				<p>Our Services</p>
@@ -47,6 +86,7 @@
 					class="list-item"
 					:class="item.active ? 'active' : ''"
 					@click="handleServiceToggle(item)"
+					@mouseenter="handleServiceToggle(item)"
 					v-for="item of serviceList"
 				>
 					<div class="list-item_logo" :class="`service${item.logo}`"></div>
@@ -337,7 +377,27 @@ const returnToTop = () => {
 }
 .nova-hero_banner {
 	margin-bottom: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
+.nova-hero_banner-logo {
+	width: 230px;
+	height: 37px;
+	background-image: url("../assets/hero-banner3.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	letter-spacing: 4px;
+	padding-left: 23px;
+}
+.nova-hero_banner-logo > span {
+	color: #944efc;
+}
+
 .nova-hero_title {
 	margin-bottom: 50px;
 	font-size: 42px;
@@ -369,10 +429,56 @@ const returnToTop = () => {
 	margin-top: 150px;
 	width: 100%;
 	height: 560px;
+	color: #fff;
+	text-align: center;
+}
+.nova-desc_center {
+	margin-top: -50px;
+	width: 100%;
+	height: 460px;
 	background-image: url("../assets/choose.jpg");
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	position: relative;
+}
+.nova-desc_center-logo {
+	position: absolute;
+	width: 234px;
+	height: 37px;
+	background-image: url("../assets/desc-choose.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	left: 50%;
+	margin-left: -117px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	letter-spacing: 4px;
+}
+.nova-desc_center-logo > span {
+	color: #944efc;
+}
+.nova-desc_center-item {
+	width: 50%;
+	display: flex;
+	justify-content: center;
+}
+.center-item_title {
+	color: #fff;
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+.center-item_content {
+	width: 75%;
+	color: #9998a0;
+}
+.center-item_content > span {
+	color: #fff;
 }
 .nova-service {
 	margin-top: 40px;
