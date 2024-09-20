@@ -1,17 +1,11 @@
 @import "./base.css";
 
 #app {
-	max-width: 1440px;
-	min-width: 1280px;
+	display: flex;
+	justify-content: center;
+	width: 100% !important;
 	margin: 0 auto;
+	box-sizing: border-box;
 	font-weight: normal;
 	background: #020014;
-}
-
-a,
-.green {
-	text-decoration: none;
-	color: hsla(160, 100%, 37%, 1);
-	transition: 0.4s;
-	padding: 3px;
 }
