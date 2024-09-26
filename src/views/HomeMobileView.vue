@@ -126,8 +126,9 @@
 					v-if="item.logo === 'nova'"
 					class="group-item_banner"
 					:class="`group-item_banner-${item.item}`"
+					@click="linkToPage(item.link)"
 				></div>
-				<div v-else class="group-item_text">
+				<div v-else class="group-item_text" @click="linkToPage(item.link)">
 					{{ item.text }}
 				</div>
 			</div>
@@ -173,7 +174,7 @@
 		</div>
 	</div>
 	<nav class="nova-devide"></nav>
-	<footer class="nova-footer">
+	<!-- <footer class="nova-footer">
 		<div class="nova-footer_contact">
 			<div class="nova-footer_contact-title"></div>
 			<div class="nova-footer_contact-detail">
@@ -221,7 +222,7 @@
 				<div class="footer-link_item-link">Privacy</div>
 			</div>
 		</div>
-	</footer>
+	</footer> -->
 	<div class="nova-devide"></div>
 	<div class="copyright">
 		Copyright 2024 nova strategy · All rights reserved ·
@@ -249,18 +250,18 @@ const navigation = {
 };
 
 const partnerList = reactive([
-	{ item: "1", logo: "nova" },
-	{ item: "2", logo: "nova" },
-	{ item: "3", logo: "nova" },
-	{ item: "7", logo: "", text: "Notcoin" },
-	{ item: "8", logo: "", text: "Gaia" },
-	{ item: "9", logo: "", text: "O.LAB" },
-	{ item: "4", logo: "nova" },
-	{ item: "5", logo: "nova" },
-	{ item: "6", logo: "nova" },
-	{ item: "10", logo: "", text: "Milady" },
-	{ item: "11", logo: "", text: "io.net" },
-	{ item: "12", logo: "", text: "UXLINK" },
+	{ item: "1", logo: "nova", link: "https://notco.in/" },
+	{ item: "2", logo: "nova", link: "https://www.gaianet.ai/" },
+	{ item: "3", logo: "nova", link: "https://www.olab.xyz/" },
+	{ item: "7", logo: "", text: "Notcoin", link: "https://notco.in/" },
+	{ item: "8", logo: "", text: "Gaia", link: "https://www.gaianet.ai/" },
+	{ item: "9", logo: "", text: "O.LAB", link: "https://www.olab.xyz/" },
+	{ item: "4", logo: "nova", link: "https://milady.gg/" },
+	{ item: "5", logo: "nova", link: "https://io.net/team" },
+	{ item: "6", logo: "nova", link: "https://www.uxlink.io/" },
+	{ item: "10", logo: "", text: "Milady", link: "https://milady.gg/" },
+	{ item: "11", logo: "", text: "io.net", link: "https://io.net/team" },
+	{ item: "12", logo: "", text: "UXLINK", link: "https://www.uxlink.io/" },
 ]);
 
 const serviceList = reactive([
@@ -322,6 +323,10 @@ const serviceList = reactive([
 		],
 	},
 ]);
+
+const linkToPage = (link) => {
+	window.location.href = link;
+};
 
 // 左右箭头点击事件
 const slideNext = () => {
