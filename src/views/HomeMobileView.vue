@@ -173,7 +173,7 @@
 			</form>
 		</div>
 	</div>
-	<nav class="nova-devide"></nav>
+	<!-- <nav class="nova-devide"></nav> -->
 	<!-- <footer class="nova-footer">
 		<div class="nova-footer_contact">
 			<div class="nova-footer_contact-title"></div>
