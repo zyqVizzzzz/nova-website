@@ -24,8 +24,7 @@
 		<div class="nova-hero_title">
 			<p>Your Strategic Growth</p>
 			<p>Partner And Web3</p>
-			<p>CMO about Nova</p>
-			<p>Strategy</p>
+			<p>CMO</p>
 		</div>
 	</div>
 	<div class="nova-about">
@@ -52,20 +51,19 @@
 			<div class="nova-desc_center-item">
 				<div class="center-item_content">
 					<div class="center-item_title">Experts in Growth and Marketing</div>
-					Premium influencer & media resources in more than
-					<span>34</span> major crypto markets. A wide selection of
-					<span>1800+</span> global premium influencers, reaching
-					<span>20M+</span> crypto audiences.
+					Our core team members come from top exchanges and projects. With
+					extensive experience in building global markets and driving growth
+					from zero to hero, we are well-versed in creating international brand
+					strategies and growth plans.
 				</div>
 			</div>
 			<nav class="nova-devide-left"></nav>
 			<div class="nova-desc_center-item">
 				<div class="center-item_content">
 					<div class="center-item_title">Extensive & Quality Outreach</div>
-					Premium influencer & media resources in more than
-					<span>34</span> major crypto markets. A wide selection of
-					<span>1800+</span> global premium influencers, reaching
-					<span>20M+</span> crypto audiences.
+					Premium influencer & media resources in various major crypto markets.
+					A wide selection of 1800+ global premium influencers, reaching 20M+
+					crypto audiences 180B+ Trading Volume Generated
 				</div>
 			</div>
 			<nav class="nova-devide-right"></nav>
@@ -91,26 +89,32 @@
 		<div class="nova-service_title">
 			<p>Our Services</p>
 		</div>
-		<swiper
-			:slides-per-view="1"
-			space-between="30"
-			:pagination="pagination"
-			class="nova-service_swiper"
-		>
-			<swiper-slide
-				class="list-item"
-				v-for="item in serviceList"
-				:key="item.title"
+		<div class="nova-service_contain">
+			<swiper
+				ref="mySwiper"
+				:slides-per-view="1"
+				space-between="30"
+				:pagination="pagination"
+				:navigation="navigation"
+				class="nova-service_swiper"
 			>
-				<div class="list-item_logo" :class="`service${item.logo}`"></div>
-				<div class="list-item_title">{{ item.title }}</div>
-				<div class="list-item_child">
-					<p v-for="(service, index) in item.childrenList" :key="index">
-						{{ service.text }}
-					</p>
-				</div>
-			</swiper-slide>
-		</swiper>
+				<swiper-slide
+					class="list-item"
+					v-for="item in serviceList"
+					:key="item.title"
+				>
+					<div class="list-item_logo" :class="`service${item.logo}`">
+						<div class="swiper-button-next" @click="slideNext"></div>
+					</div>
+					<div class="list-item_title">{{ item.title }}</div>
+					<div class="list-item_child">
+						<p v-for="(service, index) in item.childrenList" :key="index">
+							{{ service.text }}
+						</p>
+					</div>
+				</swiper-slide>
+			</swiper>
+		</div>
 	</div>
 	<div class="nova-partners">
 		<div class="nova-partners_title">
@@ -118,12 +122,14 @@
 		</div>
 		<div class="nova-partners_group">
 			<div class="group-item" v-for="item in partnerList">
-				<!-- <img
-						:src="`src/assets/banner.jpg`"
-						style="width: 85px; height: 30px"
-						alt=""
-					/> -->
-				<div class="group-item_banner"></div>
+				<div
+					v-if="item.logo === 'nova'"
+					class="group-item_banner"
+					:class="`group-item_banner-${item.item}`"
+				></div>
+				<div v-else class="group-item_text">
+					{{ item.text }}
+				</div>
 			</div>
 		</div>
 	</div>
@@ -230,67 +236,79 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/swiper-bundle.css";
 
 const isMenuOpen = ref(false);
+const mySwiper = ref(null); // Swiper 实例
 
 const pagination = {
 	el: ".swiper-pagination", // Swiper 将会生成的分页器元素
 	clickable: true, // 启用分页器的点击切换功能
 };
 
+const navigation = {
+	nextEl: ".swiper-button-next",
+	prevEl: ".swiper-button-prev",
+};
+
 const partnerList = reactive([
 	{ item: "1", logo: "nova" },
 	{ item: "2", logo: "nova" },
 	{ item: "3", logo: "nova" },
+	{ item: "7", logo: "", text: "Notcoin" },
+	{ item: "8", logo: "", text: "Gaia" },
+	{ item: "9", logo: "", text: "O.LAB" },
 	{ item: "4", logo: "nova" },
 	{ item: "5", logo: "nova" },
 	{ item: "6", logo: "nova" },
-	{ item: "7", logo: "nova" },
-	{ item: "8", logo: "nova" },
-	{ item: "9", logo: "nova" },
-	{ item: "10", logo: "nova" },
-	{ item: "11", logo: "nova" },
-	{ item: "12", logo: "nova" },
+	{ item: "10", logo: "", text: "Milady" },
+	{ item: "11", logo: "", text: "io.net" },
+	{ item: "12", logo: "", text: "UXLINK" },
 ]);
 
 const serviceList = reactive([
 	{
 		logo: "1",
-		title: "Strategy Consulting Service",
+		title: "Global Growth Strategy Consulting",
 		active: true,
 		childrenList: [
-			{ logo: 1, text: "Community Building and Management" },
-			{ logo: 2, text: "Ecosystem Support" },
-			{ logo: 3, text: "Partnerships and Alliances" },
-			{ logo: 4, text: "140+ Media House Globally" },
-			{ logo: 5, text: "Marketing and Brand Promotion" },
+			{ logo: 1, text: "Partnerships and Alliances" },
+			{ logo: 2, text: "Marketing and Brand Promotion" },
+			{ logo: 3, text: "Security and Compliance" },
+			{ logo: 4, text: "Ecosystem Support" },
+			{ logo: 5, text: "140+ Media House Globally" },
 			{ logo: 6, text: "Governance and Incentive Mechanisms" },
-			{ logo: 7, text: "Security and Compliance" },
+			{
+				logo: 7,
+				text: "Empowering your global expansion with tailored strategies and comprehensive supportCommunity Building and Management",
+			},
 		],
 	},
 	{
 		logo: "2",
 		active: false,
-		title: "Consulting Service",
+		title: "Press & Branding",
 		childrenList: [
-			{ logo: 1, text: "Community Building and Management" },
-			{ logo: 2, text: "Ecosystem Support" },
-			{ logo: 3, text: "Partnerships and Alliances" },
-			{ logo: 4, text: "140+ Media House Globally" },
-			{ logo: 5, text: "Marketing and Brand Promotion" },
-			{ logo: 6, text: "Governance and Incentive Mechanisms" },
-			{ logo: 7, text: "Security and Compliance" },
+			{ logo: 1, text: "Global media relationship management" },
+			{ logo: 2, text: "Local meet up events setup and logistics" },
+			{
+				logo: 3,
+				text: "Over 140 global media outlets in 14+ languages, both crypto, business and tech media, including tier 1, tier 2, and niche media outlets.",
+			},
 		],
 	},
 	{
 		logo: "3",
 		active: false,
-		title: "Selected Global Kols & Communities",
+		title: "Influencer Marketing",
 		childrenList: [
 			{ logo: 1, text: "Over 1800+ Influencers" },
 			{ logo: 2, text: "Reach 20M+ Audiences" },
 			{ logo: 3, text: "100+ Web3 Communities" },
 			{
 				logo: 4,
-				text: "Cover 34+ Major Countries ( Eglish, Greater China, South Korea, Japan, SEA, South Asia, Korea, LATAM, Turkey, Europe, CIS, more…)",
+				text: "Professional services)",
+			},
+			{
+				logo: 5,
+				text: "Cover 34+ Major Countries ( Eglish, Greater China, South Korea, Japan, SEA, South Asia, Korea, LATAM, Turkey, Europe, CIS, more…",
 			},
 		],
 	},
@@ -301,10 +319,22 @@ const serviceList = reactive([
 		childrenList: [
 			{ logo: 1, text: "Reach TOP Exchanges For Token Listing" },
 			{ logo: 2, text: "5+ TOP VCs" },
-			{ logo: 3, text: "180B+ Trading Volume Generated" },
 		],
 	},
 ]);
+
+// 左右箭头点击事件
+const slideNext = () => {
+	if (mySwiper.value) {
+		mySwiper.value.slideNext(); // 向右滑动
+	}
+};
+
+const slidePrev = () => {
+	if (mySwiper.value) {
+		mySwiper.value.slidePrev(); // 向左滑动
+	}
+};
 
 const returnToTop = () => {
 	window.scrollTo({
@@ -575,6 +605,10 @@ const scrollToSection = () => {
 	margin-bottom: 40px;
 	text-align: center;
 	color: #fff;
+	position: relative;
+}
+.nova-service_contain {
+	position: relative;
 }
 
 .nova-service_title {
@@ -598,16 +632,20 @@ const scrollToSection = () => {
 	font-size: 18px;
 	font-weight: 400;
 	border-radius: 20px;
-
 	color: white;
 	position: relative;
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-	height: 401px;
+	height: 458px;
 	background-image: url("../assets/service-active-mobile.jpg");
 	background-size: 100%;
 	padding: 25px 25px;
 	box-sizing: border-box;
 	text-align: left;
+}
+
+.list-item_logo {
+	position: relative;
+	width: 100% !important;
 }
 
 .list-item_title {
@@ -700,6 +738,60 @@ const scrollToSection = () => {
 	background-image: url("../assets/banner.jpg");
 	background-repeat: no-repeat;
 	background-size: contain;
+}
+
+.group-item_text {
+	font-size: 24px;
+}
+
+.group-item_banner-1 {
+	width: 179px;
+	height: 50px;
+	background-image: url("../assets/port-notcoin.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+}
+.group-item_banner-2 {
+	width: 100px;
+	height: 45px;
+	background-image: url("../assets/port-gaia.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+}
+.group-item_banner-3 {
+	width: 179px;
+	height: 45px;
+	background-image: url("../assets/port-olab.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+}
+.group-item_banner-4 {
+	width: 179px;
+	height: 45px;
+	background-image: url("../assets/port-milady.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+}
+.group-item_banner-5 {
+	width: 179px;
+	height: 45px;
+
+	background-image: url("../assets/port-ionet.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+}
+.group-item_banner-6 {
+	width: 179px;
+	height: 45px;
+	background-image: url("../assets/port-uxlink.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
 }
 
 .nova-partners_group > div {
@@ -913,5 +1005,30 @@ textarea {
 }
 .copyright > span {
 	cursor: pointer;
+}
+
+/* 样式自定义箭头 */
+.swiper-button-prev,
+.swiper-button-next {
+	position: absolute;
+	top: 100%;
+	z-index: 10;
+	cursor: pointer;
+	font-size: 14px;
+	color: #fff;
+	width: 10px;
+	height: 10px;
+}
+.swiper-button-prev:after,
+.swiper-button-next:after {
+	font-size: 24px;
+	font-weight: 600;
+}
+.swiper-button-prev {
+	left: 5px;
+}
+
+.swiper-button-next {
+	right: 25px;
 }
 </style>

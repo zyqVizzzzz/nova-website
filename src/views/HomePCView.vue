@@ -17,7 +17,7 @@
 		</div>
 		<div class="nova-hero_title">
 			<p>Your Strategic Growth Partner</p>
-			<p>And Web3 CMO about Nova Strategy</p>
+			<p>And Web3 CMO</p>
 		</div>
 	</div>
 	<div class="nova-about">
@@ -44,19 +44,18 @@
 			<div class="nova-desc_center-item">
 				<div class="center-item_content">
 					<div class="center-item_title">Experts in Growth and Marketing</div>
-					Premium influencer & media resources in more than
-					<span>34</span> major crypto markets. A wide selection of
-					<span>1800+</span> global premium influencers, reaching
-					<span>20M+</span> crypto audiences.
+					Our core team members come from top exchanges and projects. With
+					extensive experience in building global markets and driving growth
+					from zero to hero, we are well-versed in creating international brand
+					strategies and growth plans.
 				</div>
 			</div>
 			<div class="nova-desc_center-item">
 				<div class="center-item_content">
 					<div class="center-item_title">Extensive & Quality Outreach</div>
-					Premium influencer & media resources in more than
-					<span>34</span> major crypto markets. A wide selection of
-					<span>1800+</span> global premium influencers, reaching
-					<span>20M+</span> crypto audiences.
+					Premium influencer & media resources in various major crypto markets.
+					A wide selection of 1800+ global premium influencers, reaching 20M+
+					crypto audiences 180B+ Trading Volume Generated
 				</div>
 			</div>
 			<div class="nova-desc_center-item">
@@ -69,7 +68,7 @@
 			<div class="nova-desc_center-item">
 				<div class="center-item_content">
 					<div class="center-item_title">Top Notch Resources</div>
-					Industry top partners, global top exchanges, VCs, sport and
+					industry top partners, global top exchanges, VCs, sport and
 					entertainment sponsorship resources etc.
 				</div>
 			</div>
@@ -111,7 +110,14 @@
 						style="width: 85px; height: 30px"
 						alt=""
 					/> -->
-				<div class="group-item_banner"></div>
+				<div
+					v-if="item.logo === 'nova'"
+					class="group-item_banner"
+					:class="`group-item_banner-${item.item}`"
+				></div>
+				<div v-else class="group-item_text">
+					{{ item.text }}
+				</div>
 			</div>
 		</div>
 	</div>
@@ -221,43 +227,49 @@ const checkWindowWidth = () => {
 const serviceList = reactive([
 	{
 		logo: "1",
-		title: "Strategy Consulting Service",
+		title: "Global Growth Strategy Consulting",
 		active: true,
 		childrenList: [
-			{ logo: 1, text: "Community Building and Management" },
-			{ logo: 2, text: "Ecosystem Support" },
-			{ logo: 3, text: "Partnerships and Alliances" },
-			{ logo: 4, text: "140+ Media House Globally" },
-			{ logo: 5, text: "Marketing and Brand Promotion" },
+			{ logo: 1, text: "Partnerships and Alliances" },
+			{ logo: 2, text: "Marketing and Brand Promotion" },
+			{ logo: 3, text: "Security and Compliance" },
+			{ logo: 4, text: "Ecosystem Support" },
+			{ logo: 5, text: "140+ Media House Globally" },
 			{ logo: 6, text: "Governance and Incentive Mechanisms" },
-			{ logo: 7, text: "Security and Compliance" },
+			{
+				logo: 7,
+				text: "Empowering your global expansion with tailored strategies and comprehensive supportCommunity Building and Management",
+			},
 		],
 	},
 	{
 		logo: "2",
 		active: false,
-		title: "Consulting Service",
+		title: "Press & Branding",
 		childrenList: [
-			{ logo: 1, text: "Community Building and Management" },
-			{ logo: 2, text: "Ecosystem Support" },
-			{ logo: 3, text: "Partnerships and Alliances" },
-			{ logo: 4, text: "140+ Media House Globally" },
-			{ logo: 5, text: "Marketing and Brand Promotion" },
-			{ logo: 6, text: "Governance and Incentive Mechanisms" },
-			{ logo: 7, text: "Security and Compliance" },
+			{ logo: 1, text: "Global media relationship management" },
+			{ logo: 2, text: "Local meet up events setup and logistics" },
+			{
+				logo: 3,
+				text: "Over 140 global media outlets in 14+ languages, both crypto, business and tech media, including tier 1, tier 2, and niche media outlets.",
+			},
 		],
 	},
 	{
 		logo: "3",
 		active: false,
-		title: "Selected Global Kols & Communities",
+		title: "Influencer Marketing",
 		childrenList: [
 			{ logo: 1, text: "Over 1800+ Influencers" },
 			{ logo: 2, text: "Reach 20M+ Audiences" },
 			{ logo: 3, text: "100+ Web3 Communities" },
 			{
 				logo: 4,
-				text: "Cover 34+ Major Countries ( Eglish, Greater China, South Korea, Japan, SEA, South Asia, Korea, LATAM, Turkey, Europe, CIS, more…)",
+				text: "Professional services)",
+			},
+			{
+				logo: 5,
+				text: "Cover 34+ Major Countries ( Eglish, Greater China, South Korea, Japan, SEA, South Asia, Korea, LATAM, Turkey, Europe, CIS, more…",
 			},
 		],
 	},
@@ -268,7 +280,6 @@ const serviceList = reactive([
 		childrenList: [
 			{ logo: 1, text: "Reach TOP Exchanges For Token Listing" },
 			{ logo: 2, text: "5+ TOP VCs" },
-			{ logo: 3, text: "180B+ Trading Volume Generated" },
 		],
 	},
 ]);
@@ -280,12 +291,12 @@ const partnerList = reactive([
 	{ item: "4", logo: "nova" },
 	{ item: "5", logo: "nova" },
 	{ item: "6", logo: "nova" },
-	{ item: "7", logo: "nova" },
-	{ item: "8", logo: "nova" },
-	{ item: "9", logo: "nova" },
-	{ item: "10", logo: "nova" },
-	{ item: "11", logo: "nova" },
-	{ item: "12", logo: "nova" },
+	{ item: "7", logo: "", text: "Notcoin" },
+	{ item: "8", logo: "", text: "Gaia" },
+	{ item: "9", logo: "", text: "O.LAB" },
+	{ item: "10", logo: "", text: "Milady" },
+	{ item: "11", logo: "", text: "io.net" },
+	{ item: "12", logo: "", text: "UXLINK" },
 ]);
 
 const handleServiceToggle = (item) => {
@@ -562,7 +573,7 @@ const returnToTop = () => {
 }
 .list-item.active .list-item_child {
 	opacity: 1;
-	max-height: 200px; /* 根据内容大小调整此值，或使用auto */
+	max-height: 230px; /* 根据内容大小调整此值，或使用auto */
 }
 
 .nova-service_list > li.active .list-item_child {
@@ -601,6 +612,59 @@ const returnToTop = () => {
 	background-image: url("../assets/banner.jpg");
 	background-repeat: no-repeat;
 	background-size: contain;
+}
+
+.group-item_text {
+	font-size: 30px;
+}
+
+.group-item_banner-1 {
+	width: 179px;
+	height: 78px;
+	background-image: url("../assets/port-notcoin.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+}
+.group-item_banner-2 {
+	width: 179px;
+	height: 70px;
+	background-image: url("../assets/port-gaia.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+}
+.group-item_banner-3 {
+	width: 179px;
+	height: 70px;
+	background-image: url("../assets/port-olab.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+}
+.group-item_banner-4 {
+	width: 179px;
+	height: 70px;
+	background-image: url("../assets/port-milady.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+}
+.group-item_banner-5 {
+	width: 179px;
+	height: 70px;
+	background-image: url("../assets/port-ionet.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+}
+.group-item_banner-6 {
+	width: 179px;
+	height: 70px;
+	background-image: url("../assets/port-uxlink.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
 }
 
 .nova-partners_group > div {
