@@ -92,10 +92,10 @@
 		<div class="nova-service_contain">
 			<swiper
 				ref="mySwiper"
+				:modules="[Pagination]"
 				:slides-per-view="1"
 				space-between="30"
 				:pagination="pagination"
-				:navigation="navigation"
 				class="nova-service_swiper"
 			>
 				<swiper-slide
@@ -103,9 +103,7 @@
 					v-for="item in serviceList"
 					:key="item.title"
 				>
-					<div class="list-item_logo" :class="`service${item.logo}`">
-						<div class="swiper-button-next" @click="slideNext"></div>
-					</div>
+					<div class="list-item_logo" :class="`service${item.logo}`"></div>
 					<div class="list-item_title">{{ item.title }}</div>
 					<div class="list-item_child">
 						<p v-for="(service, index) in item.childrenList" :key="index">
@@ -114,6 +112,14 @@
 					</div>
 				</swiper-slide>
 			</swiper>
+			<div class="swiper-pagination"></div>
+			<!-- <div class="swiper-pagination">
+				<div
+					v-for="item in serviceList"
+					class="swiper-pagination-bull"
+					:class="{ 'swiper-pagination-bull-active': isActive }"
+				></div>
+			</div> -->
 		</div>
 	</div>
 	<div class="nova-partners">
@@ -235,18 +241,14 @@
 import { ref, reactive, onMounted } from "vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/swiper-bundle.css";
+import { Pagination } from "swiper/modules";
 
 const isMenuOpen = ref(false);
 const mySwiper = ref(null); // Swiper 实例
 
 const pagination = {
-	el: ".swiper-pagination", // Swiper 将会生成的分页器元素
-	clickable: true, // 启用分页器的点击切换功能
-};
-
-const navigation = {
-	nextEl: ".swiper-button-next",
-	prevEl: ".swiper-button-prev",
+	el: ".swiper-pagination", // 分页点的容器
+	clickable: true, // 允许点击切换
 };
 
 const partnerList = reactive([
@@ -326,19 +328,6 @@ const serviceList = reactive([
 
 const linkToPage = (link) => {
 	window.location.href = link;
-};
-
-// 左右箭头点击事件
-const slideNext = () => {
-	if (mySwiper.value) {
-		mySwiper.value.slideNext(); // 向右滑动
-	}
-};
-
-const slidePrev = () => {
-	if (mySwiper.value) {
-		mySwiper.value.slidePrev(); // 向左滑动
-	}
 };
 
 const returnToTop = () => {
@@ -643,6 +632,7 @@ const scrollToSection = () => {
 	height: 458px;
 	background-image: url("../assets/service-active-mobile.jpg");
 	background-size: 100%;
+	background-repeat: no-repeat;
 	padding: 25px 25px;
 	box-sizing: border-box;
 	text-align: left;
@@ -675,11 +665,7 @@ const scrollToSection = () => {
 
 .nova-service_swiper {
 	width: 100%;
-	height: auto;
-}
-
-.swiper-pagination {
-	bottom: 10px;
+	height: 500px;
 }
 
 .service1 {
@@ -987,9 +973,6 @@ textarea {
 	width: 100%;
 }
 
-.footer-link_item {
-}
-
 .footer-link_item-title {
 	font-size: 17px;
 	color: #fff;
@@ -1010,30 +993,5 @@ textarea {
 }
 .copyright > span {
 	cursor: pointer;
-}
-
-/* 样式自定义箭头 */
-.swiper-button-prev,
-.swiper-button-next {
-	position: absolute;
-	top: 100%;
-	z-index: 10;
-	cursor: pointer;
-	font-size: 14px;
-	color: #fff;
-	width: 10px;
-	height: 10px;
-}
-.swiper-button-prev:after,
-.swiper-button-next:after {
-	font-size: 24px;
-	font-weight: 600;
-}
-.swiper-button-prev {
-	left: 5px;
-}
-
-.swiper-button-next {
-	right: 25px;
 }
 </style>
