@@ -123,11 +123,18 @@
 		</div>
 	</div>
 	<div class="nova-form" ref="novaform">
+		<div class="submit-tip" v-if="isFormTip">
+			<p>Submission Successful!</p>
+			<p>We will be in touch with you shortly...</p>
+		</div>
 		<div class="nova-form_title">
-			<p>Social Media & <br />Community Matrix</p>
+			<p>Follow Us</p>
+			<p class="twitter-logo" @click="linkToTwitter">
+				<img src="../assets/twitter.jpg" alt="" width="52px" />
+			</p>
 		</div>
 		<div class="nova-form_container">
-			<form class="nova-form_container-form">
+			<div class="nova-form_container-form">
 				<div class="form-row">
 					<div class="form-group">
 						<input type="text" id="first-name" placeholder="First Name" />
@@ -154,9 +161,11 @@
 				</div>
 
 				<div class="form-row button-row">
-					<button type="submit" class="submit-button">Contact Us</button>
+					<button type="submit" class="submit-button" @click="handleSubmit">
+						Contact Us
+					</button>
 				</div>
-			</form>
+			</div>
 		</div>
 	</div>
 	<!-- <div class="nova-devide"></div>
@@ -224,6 +233,8 @@ const checkWindowWidth = () => {
 		isMobile.value = true;
 	}
 };
+
+const isFormTip = ref(false);
 
 const serviceList = reactive([
 	{
@@ -301,7 +312,15 @@ const partnerList = reactive([
 ]);
 
 const linkToPage = (link) => {
-	window.location.href = link;
+	window.open(link);
+};
+
+const handleSubmit = () => {
+	isFormTip.value = true;
+	const timer = setTimeout(() => {
+		isFormTip.value = false;
+		timer = null;
+	}, 2000);
 };
 
 const handleServiceToggle = (item) => {
@@ -313,6 +332,10 @@ const handleServiceToggle = (item) => {
 			// }, 400);
 		}
 	});
+};
+
+const linkToTwitter = () => {
+	window.open("https://x.com/thenovastrategy");
 };
 
 const scrollToSection = () => {
@@ -335,6 +358,24 @@ const returnToTop = () => {
 </script>
 
 <style scoped>
+.submit-tip {
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 300px;
+	background: rgba(30, 30, 30, 0.8);
+	text-align: left;
+	padding: 20px;
+	line-height: 20px;
+	font-size: 14px;
+	border-radius: 10px;
+	color: #888;
+	transition: all 0.4s ease;
+}
+.submit-tip > p {
+	height: 20px;
+}
 .nova-nav {
 	position: relative;
 	height: 75px;
@@ -705,10 +746,11 @@ const returnToTop = () => {
 	background-image: url("../assets/form-bg.jpg");
 	background-repeat: no-repeat;
 	background-size: contain;
+	position: relative;
 }
 
 .nova-form_title {
-	margin-bottom: 20px;
+	margin-bottom: 0px;
 	font-size: 42px;
 }
 .nova-form_title > p {
@@ -716,12 +758,20 @@ const returnToTop = () => {
 	line-height: 48px;
 }
 
+.twitter-logo {
+	max-width: 52px;
+	width: 52px;
+	margin: 0 auto;
+	margin-top: 20px;
+	cursor: pointer;
+}
+
 .nova-form_container {
 	width: 900px;
 	height: auto;
 	background: #09041f;
 	background: linear-gradient(to top, #944efc, #09041f);
-	margin: 50px auto 0;
+	margin: 30px auto 0;
 	border-radius: 20px;
 	padding: 40px 30px;
 	box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);

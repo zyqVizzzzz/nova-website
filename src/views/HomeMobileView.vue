@@ -629,9 +629,10 @@ const scrollToSection = () => {
 	color: white;
 	position: relative;
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-	height: 458px;
+	height: auto;
 	background-image: url("../assets/service-active-mobile.jpg");
-	background-size: 100%;
+	background-size: 100% 90%;
+
 	background-repeat: no-repeat;
 	padding: 25px 25px;
 	box-sizing: border-box;
