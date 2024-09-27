@@ -10,9 +10,13 @@
 			<nav class="nova-devide"></nav>
 			<li @click="toggleMenu">Home</li>
 			<nav class="nova-devide"></nav>
-			<li @click="toggleMenu">Services & Offerings</li>
+			<li @click="linkNavAbout">About nova</li>
 			<nav class="nova-devide"></nav>
-			<li @click="toggleMenu">About</li>
+			<li @click="linkNavDesc">Why Choose us</li>
+			<nav class="nova-devide"></nav>
+			<li @click="linkNavService">Our services</li>
+			<nav class="nova-devide"></nav>
+			<li @click="linkNavPartners">Partners</li>
 			<nav class="nova-devide"></nav>
 			<div class="nova-nav_button">
 				<button @click="scrollToSection">Contact Us</button>
@@ -27,7 +31,7 @@
 			<p>CMO</p>
 		</div>
 	</div>
-	<div class="nova-about">
+	<div class="nova-about" ref="about">
 		<div class="nova-about_title">
 			<p>About Nova</p>
 		</div>
@@ -43,7 +47,7 @@
 			remarkable growth.
 		</div>
 	</div>
-	<div class="nova-desc">
+	<div class="nova-desc" ref="desc">
 		<div class="nova-about_title">
 			<p>Why Choose Us?</p>
 		</div>
@@ -85,7 +89,7 @@
 			<nav class="nova-devide-right"></nav>
 		</div>
 	</div>
-	<div class="nova-service">
+	<div class="nova-service" ref="service">
 		<div class="nova-service_title">
 			<p>Our Services</p>
 		</div>
@@ -122,7 +126,7 @@
 			</div> -->
 		</div>
 	</div>
-	<div class="nova-partners">
+	<div class="nova-partners" ref="partners">
 		<div class="nova-partners_title">
 			<p>Partners</p>
 		</div>
@@ -141,11 +145,15 @@
 		</div>
 	</div>
 	<div class="nova-form" ref="novaform">
+		<div class="submit-tip" v-if="isFormTip">
+			<p>Submission Successful!</p>
+			<p>We will be in touch with you shortly...</p>
+		</div>
 		<div class="nova-form_title">
 			<p>Social Media & <br />Community Matrix</p>
 		</div>
 		<div class="nova-form_container">
-			<form class="nova-form_container-form">
+			<div class="nova-form_container-form">
 				<div class="form-row">
 					<div class="form-group">
 						<input type="text" id="first-name" placeholder="First Name" />
@@ -174,9 +182,11 @@
 				</div>
 
 				<div class="form-row button-row">
-					<button type="submit" class="submit-button">Contact Us</button>
+					<button type="submit" class="submit-button" @click="handleSubmit">
+						Contact Us
+					</button>
 				</div>
-			</form>
+			</div>
 		</div>
 	</div>
 	<!-- <nav class="nova-devide"></nav> -->
@@ -250,6 +260,13 @@ const pagination = {
 	el: ".swiper-pagination", // 分页点的容器
 	clickable: true, // 允许点击切换
 };
+
+const isFormTip = ref(false);
+const novaform = ref(null);
+const about = ref(null);
+const desc = ref(null);
+const service = ref(null);
+const partners = ref(null);
 
 const partnerList = reactive([
 	{ item: "1", logo: "nova", link: "https://notco.in/" },
@@ -330,6 +347,14 @@ const linkToPage = (link) => {
 	window.location.href = link;
 };
 
+const handleSubmit = () => {
+	isFormTip.value = true;
+	const timer = setTimeout(() => {
+		isFormTip.value = false;
+		timer = null;
+	}, 2000);
+};
+
 const returnToTop = () => {
 	window.scrollTo({
 		top: 0,
@@ -339,6 +364,35 @@ const returnToTop = () => {
 
 const toggleMenu = () => {
 	isMenuOpen.value = !isMenuOpen.value;
+};
+
+const linkNavAbout = () => {
+	toggleMenu();
+	about.value.scrollIntoView({
+		behavior: "smooth", // 平滑滚动
+		block: "start", // 滚动到目标元素的顶部
+	});
+};
+const linkNavDesc = () => {
+	toggleMenu();
+	desc.value.scrollIntoView({
+		behavior: "smooth", // 平滑滚动
+		block: "start", // 滚动到目标元素的顶部
+	});
+};
+const linkNavService = () => {
+	toggleMenu();
+	service.value.scrollIntoView({
+		behavior: "smooth", // 平滑滚动
+		block: "start", // 滚动到目标元素的顶部
+	});
+};
+const linkNavPartners = () => {
+	toggleMenu();
+	partners.value.scrollIntoView({
+		behavior: "smooth", // 平滑滚动
+		block: "start", // 滚动到目标元素的顶部
+	});
 };
 
 const handleServiceToggle = (item) => {
@@ -354,6 +408,24 @@ const scrollToSection = () => {
 </script>
 
 <style scoped>
+.submit-tip {
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 300px;
+	background: rgba(30, 30, 30, 0.8);
+	text-align: left;
+	padding: 20px;
+	line-height: 20px;
+	font-size: 14px;
+	border-radius: 10px;
+	color: #888;
+	transition: all 0.4s ease;
+}
+.submit-tip > p {
+	height: 20px;
+}
 .nova-nav {
 	width: 100%;
 	position: relative;
@@ -810,6 +882,7 @@ const scrollToSection = () => {
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
+	position: relative;
 }
 
 .nova-form_title {

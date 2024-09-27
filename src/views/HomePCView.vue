@@ -3,8 +3,10 @@
 		<div class="nova-nav_logo"></div>
 		<ul class="nova-nav_list">
 			<li>Home</li>
-			<li>Services & Offerings</li>
-			<li>About</li>
+			<li @click="linkNavAbout('about')">About nova</li>
+			<li @click="linkNavDesc('desc')">Why Choose us</li>
+			<li @click="linkNavService('service')">Our services</li>
+			<li @click="linkNavPartners('partners')">Partners</li>
 		</ul>
 		<div class="nova-nav_button">
 			<button @click="scrollToSection">Contact Us</button>
@@ -20,7 +22,7 @@
 			<p>And Web3 CMO</p>
 		</div>
 	</div>
-	<div class="nova-about">
+	<div class="nova-about" ref="about">
 		<div class="nova-about_title">
 			<p>About Nova</p>
 		</div>
@@ -36,7 +38,7 @@
 			remarkable growth.
 		</div>
 	</div>
-	<div class="nova-desc">
+	<div class="nova-desc" ref="desc">
 		<div class="nova-about_title">
 			<p>Why Choose Us?</p>
 		</div>
@@ -75,7 +77,7 @@
 			<div class="nova-desc_center-logo">N<span>O</span>VA STRATEGY</div>
 		</div>
 	</div>
-	<div class="nova-service">
+	<div class="nova-service" ref="service">
 		<div class="nova-service_title">
 			<p>Our Services</p>
 		</div>
@@ -98,7 +100,7 @@
 			</li>
 		</ul>
 	</div>
-	<div class="nova-partners">
+	<div class="nova-partners" ref="partners">
 		<div class="nova-partners_title">
 			<p>Partners</p>
 		</div>
@@ -227,6 +229,10 @@
 <script setup>
 import { ref, reactive, onMounted, onUnmounted } from "vue";
 const novaform = ref(null);
+const about = ref(null);
+const desc = ref(null);
+const service = ref(null);
+const partners = ref(null);
 const checkWindowWidth = () => {
 	// 根据窗口宽度判断是否是移动端
 	if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
@@ -345,6 +351,31 @@ const scrollToSection = () => {
 	});
 };
 
+const linkNavAbout = () => {
+	about.value.scrollIntoView({
+		behavior: "smooth", // 平滑滚动
+		block: "start", // 滚动到目标元素的顶部
+	});
+};
+const linkNavDesc = () => {
+	desc.value.scrollIntoView({
+		behavior: "smooth", // 平滑滚动
+		block: "start", // 滚动到目标元素的顶部
+	});
+};
+const linkNavService = () => {
+	service.value.scrollIntoView({
+		behavior: "smooth", // 平滑滚动
+		block: "start", // 滚动到目标元素的顶部
+	});
+};
+const linkNavPartners = () => {
+	partners.value.scrollIntoView({
+		behavior: "smooth", // 平滑滚动
+		block: "start", // 滚动到目标元素的顶部
+	});
+};
+
 /**
  * Returns the user to the top of the page.
  * @return {void}
@@ -396,7 +427,7 @@ const returnToTop = () => {
 .nova-nav_list {
 	color: #d8d8d8;
 	display: flex;
-	width: 320px;
+	width: 640px;
 	justify-content: space-between;
 }
 .nova-nav_list > li {
