@@ -105,24 +105,21 @@
 			<p>Partners</p>
 		</div>
 		<div class="nova-devide"></div>
-		<div class="nova-partners_group">
-			<div class="group-item" v-for="item in partnerList">
-				<!-- <img
-						:src="`src/assets/banner.jpg`"
-						style="width: 85px; height: 30px"
-						alt=""
-					/> -->
-				<div
-					v-if="item.logo === 'nova'"
-					class="group-item_banner"
-					:class="`group-item_banner-${item.item}`"
-					@click="linkToPage(item.link)"
-				></div>
-				<div v-else class="group-item_text" @click="linkToPage(item.link)">
-					{{ item.text }}
+		<Vue3Marquee :duration="20" :delay="0" direction="left" :repeat="5">
+			<div class="nova-partners_group">
+				<div class="group-item" v-for="item in partnerList">
+					<div
+						v-if="item.logo === 'nova'"
+						class="group-item_banner"
+						:class="`group-item_banner-${item.item}`"
+						@click="linkToPage(item.link)"
+					></div>
+					<div v-else class="group-item_text" @click="linkToPage(item.link)">
+						{{ item.text }}
+					</div>
 				</div>
 			</div>
-		</div>
+		</Vue3Marquee>
 	</div>
 	<div class="nova-form" ref="novaform">
 		<div class="submit-tip" v-if="isFormTip">
@@ -228,11 +225,14 @@
 </template>
 <script setup>
 import { ref, reactive, onMounted, onUnmounted } from "vue";
+import { Vue3Marquee } from "vue3-marquee";
+
 const novaform = ref(null);
 const about = ref(null);
 const desc = ref(null);
 const service = ref(null);
 const partners = ref(null);
+
 const checkWindowWidth = () => {
 	// 根据窗口宽度判断是否是移动端
 	if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
