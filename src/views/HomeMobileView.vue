@@ -130,19 +130,22 @@
 		<div class="nova-partners_title">
 			<p>Partners</p>
 		</div>
-		<div class="nova-partners_group">
-			<div class="group-item" v-for="item in partnerList">
-				<div
-					v-if="item.logo === 'nova'"
-					class="group-item_banner"
-					:class="`group-item_banner-${item.item}`"
-					@click="linkToPage(item.link)"
-				></div>
-				<div v-else class="group-item_text" @click="linkToPage(item.link)">
-					{{ item.text }}
+		<div class="nova-devide"></div>
+		<Vue3Marquee :duration="20" :delay="0" direction="left" :repeat="5">
+			<div class="nova-partners_group">
+				<div class="group-item" v-for="item in partnerList">
+					<div
+						v-if="item.logo === 'nova'"
+						class="group-item_banner"
+						:class="`group-item_banner-${item.item}`"
+						@click="linkToPage(item.link)"
+					></div>
+					<div v-else class="group-item_text" @click="linkToPage(item.link)">
+						{{ item.text }}
+					</div>
 				</div>
 			</div>
-		</div>
+		</Vue3Marquee>
 	</div>
 	<div class="nova-form" ref="novaform">
 		<div class="submit-tip" v-if="isFormTip">
@@ -150,7 +153,7 @@
 			<p>We will be in touch with you shortly...</p>
 		</div>
 		<div class="nova-form_title">
-			<p>Social Media & <br />Community Matrix</p>
+			<p>Follow Us</p>
 		</div>
 		<div class="nova-form_container">
 			<div class="nova-form_container-form">
@@ -252,6 +255,7 @@ import { ref, reactive, onMounted } from "vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/swiper-bundle.css";
 import { Pagination } from "swiper/modules";
+import { Vue3Marquee } from "vue3-marquee";
 
 const isMenuOpen = ref(false);
 const mySwiper = ref(null); // Swiper 实例
@@ -272,15 +276,17 @@ const partnerList = reactive([
 	{ item: "1", logo: "nova", link: "https://notco.in/" },
 	{ item: "2", logo: "nova", link: "https://www.gaianet.ai/" },
 	{ item: "3", logo: "nova", link: "https://www.olab.xyz/" },
-	{ item: "7", logo: "", text: "Notcoin", link: "https://notco.in/" },
-	{ item: "8", logo: "", text: "Gaia", link: "https://www.gaianet.ai/" },
-	{ item: "9", logo: "", text: "O.LAB", link: "https://www.olab.xyz/" },
 	{ item: "4", logo: "nova", link: "https://milady.gg/" },
 	{ item: "5", logo: "nova", link: "https://io.net/team" },
 	{ item: "6", logo: "nova", link: "https://www.uxlink.io/" },
+	{ item: "7", logo: "nova", link: "https://www.kava.io/" },
+	{ item: "7", logo: "", text: "Notcoin", link: "https://notco.in/" },
+	{ item: "8", logo: "", text: "Gaia", link: "https://www.gaianet.ai/" },
+	{ item: "9", logo: "", text: "O.LAB", link: "https://www.olab.xyz/" },
 	{ item: "10", logo: "", text: "Milady", link: "https://milady.gg/" },
 	{ item: "11", logo: "", text: "io.net", link: "https://io.net/team" },
 	{ item: "12", logo: "", text: "UXLINK", link: "https://www.uxlink.io/" },
+	{ item: "12", logo: "", text: "Kava", link: "https://www.kava.io/" },
 ]);
 
 const serviceList = reactive([
@@ -775,8 +781,8 @@ const scrollToSection = () => {
 }
 
 .nova-partners {
-	margin-top: 0px;
-	margin-bottom: 80px;
+	margin-top: 40px;
+	margin-bottom: 120px;
 	text-align: center;
 	color: #fff;
 }
@@ -790,7 +796,7 @@ const scrollToSection = () => {
 
 .nova-partners_group {
 	display: flex;
-	width: 100%;
+	width: 1540px;
 	flex-wrap: wrap; /* 允许项目换行 */
 	justify-content: space-between; /* 为了在每行项目间分配空间 */
 	margin: 0 auto;
@@ -802,23 +808,25 @@ const scrollToSection = () => {
 	background-image: url("../assets/banner.jpg");
 	background-repeat: no-repeat;
 	background-size: contain;
+	cursor: pointer;
 }
 
 .group-item_text {
-	font-size: 24px;
+	font-size: 30px;
+	cursor: pointer;
 }
 
 .group-item_banner-1 {
 	width: 179px;
-	height: 50px;
+	height: 78px;
 	background-image: url("../assets/port-notcoin.jpg");
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
 }
 .group-item_banner-2 {
-	width: 100px;
-	height: 45px;
+	width: 179px;
+	height: 70px;
 	background-image: url("../assets/port-gaia.jpg");
 	background-repeat: no-repeat;
 	background-size: contain;
@@ -826,7 +834,7 @@ const scrollToSection = () => {
 }
 .group-item_banner-3 {
 	width: 179px;
-	height: 45px;
+	height: 70px;
 	background-image: url("../assets/port-olab.jpg");
 	background-repeat: no-repeat;
 	background-size: contain;
@@ -834,7 +842,7 @@ const scrollToSection = () => {
 }
 .group-item_banner-4 {
 	width: 179px;
-	height: 45px;
+	height: 70px;
 	background-image: url("../assets/port-milady.jpg");
 	background-repeat: no-repeat;
 	background-size: contain;
@@ -842,8 +850,7 @@ const scrollToSection = () => {
 }
 .group-item_banner-5 {
 	width: 179px;
-	height: 45px;
-
+	height: 70px;
 	background-image: url("../assets/port-ionet.jpg");
 	background-repeat: no-repeat;
 	background-size: contain;
@@ -851,16 +858,24 @@ const scrollToSection = () => {
 }
 .group-item_banner-6 {
 	width: 179px;
-	height: 45px;
+	height: 60px;
 	background-image: url("../assets/port-uxlink.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+}
+.group-item_banner-7 {
+	width: 179px;
+	height: 70px;
+	background-image: url("../assets/port-kava.jpg");
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
 }
 
 .nova-partners_group > div {
-	width: 33%;
-	height: 64px;
+	width: 220px;
+	height: 95px;
 	display: flex;
 	justify-content: center;
 	align-items: center;

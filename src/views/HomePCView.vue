@@ -309,12 +309,14 @@ const partnerList = reactive([
 	{ item: "4", logo: "nova", link: "https://milady.gg/" },
 	{ item: "5", logo: "nova", link: "https://io.net/team" },
 	{ item: "6", logo: "nova", link: "https://www.uxlink.io/" },
+	{ item: "7", logo: "nova", link: "https://www.kava.io/" },
 	{ item: "7", logo: "", text: "Notcoin", link: "https://notco.in/" },
 	{ item: "8", logo: "", text: "Gaia", link: "https://www.gaianet.ai/" },
 	{ item: "9", logo: "", text: "O.LAB", link: "https://www.olab.xyz/" },
 	{ item: "10", logo: "", text: "Milady", link: "https://milady.gg/" },
 	{ item: "11", logo: "", text: "io.net", link: "https://io.net/team" },
 	{ item: "12", logo: "", text: "UXLINK", link: "https://www.uxlink.io/" },
+	{ item: "12", logo: "", text: "Kava", link: "https://www.kava.io/" },
 ]);
 
 const linkToPage = (link) => {
@@ -677,7 +679,7 @@ const returnToTop = () => {
 
 .nova-partners_group {
 	display: flex;
-	width: 1320px;
+	width: 1540px;
 	flex-wrap: wrap; /* 允许项目换行 */
 	justify-content: space-between; /* 为了在每行项目间分配空间 */
 	margin: 0 auto;
@@ -745,6 +747,14 @@ const returnToTop = () => {
 	background-size: contain;
 	background-position: center;
 }
+.group-item_banner-7 {
+	width: 179px;
+	height: 70px;
+	background-image: url("../assets/port-kava.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+}
 
 .nova-partners_group > div {
 	width: 220px;
@@ -756,13 +766,6 @@ const returnToTop = () => {
 
 	box-shadow: 0 0 30px 1px rgba(255, 255, 255, 0.1); /* 外部渐变光晕 */
 	border: 2px solid transparent;
-	/* background-image: linear-gradient(white, white),
-		radial-gradient(
-			circle at center,
-			rgba(255, 255, 255, 0),
-			rgba(148, 78, 252, 0.5),
-			rgba(2, 0, 20, 1)
-		); */
 	background-origin: border-box;
 	background-clip: padding-box, border-box;
 }
