@@ -154,31 +154,55 @@
 		</div>
 		<div class="nova-form_title">
 			<p>Follow Us</p>
+			<p class="twitter-logo" @click="linkToTwitter">
+				<img src="../assets/twitter.jpg" alt="" width="52px" />
+			</p>
 		</div>
 		<div class="nova-form_container">
 			<div class="nova-form_container-form">
 				<div class="form-row">
 					<div class="form-group">
-						<input type="text" id="first-name" placeholder="First Name" />
+						<input
+							type="text"
+							id="first-name"
+							v-model="form.firstName"
+							placeholder="First Name"
+						/>
 					</div>
 				</div>
 				<div class="form-row">
 					<div class="form-group">
-						<input type="text" id="last-name" placeholder="Last Name" />
+						<input
+							type="text"
+							id="last-name"
+							v-model="form.lastName"
+							placeholder="Last Name"
+						/>
 					</div>
 				</div>
 				<div class="form-row">
 					<div class="form-group">
-						<input type="text" id="telegram" placeholder="Telegram Username" />
+						<input
+							type="text"
+							id="telegram"
+							v-model="form.telegram"
+							placeholder="Telegram Username"
+						/>
 					</div>
 				</div>
 				<div class="form-row">
 					<div class="form-group">
-						<input type="email" id="email" placeholder="xxxxx@gmail.com" />
+						<input
+							type="email"
+							v-model="form.email"
+							id="email"
+							placeholder="xxxxx@gmail.com"
+						/>
 					</div>
 				</div>
 				<div class="form-row full-width">
 					<textarea
+						v-model="form.message"
 						placeholder="Please enter your questions or suggestions for us and we will contact you after receiving the information."
 					></textarea>
 					<div class="word-count">Number of words: 1000</div>
@@ -265,7 +289,6 @@ const pagination = {
 	clickable: true, // 允许点击切换
 };
 
-const isFormTip = ref(false);
 const novaform = ref(null);
 const about = ref(null);
 const desc = ref(null);
@@ -349,16 +372,12 @@ const serviceList = reactive([
 	},
 ]);
 
-const linkToPage = (link) => {
-	window.location.href = link;
+const linkToTwitter = () => {
+	window.open("https://x.com/thenovastrategy");
 };
 
-const handleSubmit = () => {
-	isFormTip.value = true;
-	const timer = setTimeout(() => {
-		isFormTip.value = false;
-		timer = null;
-	}, 2000);
+const linkToPage = (link) => {
+	window.location.href = link;
 };
 
 const returnToTop = () => {
@@ -410,6 +429,52 @@ const scrollToSection = () => {
 		behavior: "smooth", // 平滑滚动
 		block: "start", // 滚动到目标元素的顶部
 	});
+};
+
+const form = ref({
+	firstName: "",
+	lastName: "",
+	telegram: "",
+	email: "",
+	message: "",
+});
+const isFormTip = ref(false);
+const responseMessage = ref("");
+const responseColor = ref("");
+
+const handleSubmit = async () => {
+	try {
+		const response = await fetch("https://formspree.io/f/xanwrpbr", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(form.value),
+		});
+
+		if (response.ok) {
+			responseMessage.value = "Thank you for your message!";
+			responseColor.value = "green";
+			form.value = {
+				firstName: "",
+				lastName: "",
+				telegram: "",
+				email: "",
+				message: "",
+			};
+
+			isFormTip.value = true;
+			const timer = setTimeout(() => {
+				isFormTip.value = false;
+				timer = null;
+			}, 2000);
+		} else {
+			throw new Error("Form submission failed");
+		}
+	} catch (error) {
+		responseMessage.value = "Something went wrong. Please try again later.";
+		responseColor.value = "red";
+	}
 };
 </script>
 
@@ -907,6 +972,13 @@ const scrollToSection = () => {
 .nova-form_title > p {
 	font-weight: 400;
 	line-height: 48px;
+}
+.twitter-logo {
+	max-width: 52px;
+	width: 52px;
+	margin: 0 auto;
+	margin-top: 20px;
+	cursor: pointer;
 }
 
 .nova-form_container {

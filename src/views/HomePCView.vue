@@ -141,24 +141,50 @@
 			<div class="nova-form_container-form">
 				<div class="form-row">
 					<div class="form-group">
-						<input type="text" id="first-name" placeholder="First Name" />
+						<input
+							type="text"
+							id="first-name"
+							name="first-name"
+							v-model="form.firstName"
+							placeholder="First Name"
+						/>
 					</div>
 					<div class="form-group">
-						<input type="text" id="last-name" placeholder="Last Name" />
+						<input
+							type="text"
+							id="last-name"
+							name="last-name"
+							v-model="form.lastName"
+							placeholder="Last Name"
+						/>
 					</div>
 				</div>
 
 				<div class="form-row">
 					<div class="form-group">
-						<input type="text" id="telegram" placeholder="Telegram Username" />
+						<input
+							type="text"
+							id="telegram"
+							name="telegram"
+							v-model="form.telegram"
+							placeholder="Telegram Username"
+						/>
 					</div>
 					<div class="form-group">
-						<input type="email" id="email" placeholder="xxxxx@gmail.com" />
+						<input
+							type="email"
+							name="email"
+							id="email"
+							v-model="form.email"
+							placeholder="xxxxx@gmail.com"
+						/>
 					</div>
 				</div>
 
 				<div class="form-row full-width">
 					<textarea
+						name="message"
+						v-model="form.message"
 						placeholder="Please enter your questions or suggestions for us and we will contact you after receiving the information."
 					></textarea>
 					<div class="word-count">Number of words: 1000</div>
@@ -328,12 +354,50 @@ const linkToPage = (link) => {
 	window.open(link);
 };
 
-const handleSubmit = () => {
-	isFormTip.value = true;
-	const timer = setTimeout(() => {
-		isFormTip.value = false;
-		timer = null;
-	}, 2000);
+const form = ref({
+	firstName: "",
+	lastName: "",
+	telegram: "",
+	email: "",
+	message: "",
+});
+
+const responseMessage = ref("");
+const responseColor = ref("");
+
+const handleSubmit = async () => {
+	try {
+		const response = await fetch("https://formspree.io/f/xanwrpbr", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(form.value),
+		});
+
+		if (response.ok) {
+			responseMessage.value = "Thank you for your message!";
+			responseColor.value = "green";
+			form.value = {
+				firstName: "",
+				lastName: "",
+				telegram: "",
+				email: "",
+				message: "",
+			};
+
+			isFormTip.value = true;
+			const timer = setTimeout(() => {
+				isFormTip.value = false;
+				timer = null;
+			}, 2000);
+		} else {
+			throw new Error("Form submission failed");
+		}
+	} catch (error) {
+		responseMessage.value = "Something went wrong. Please try again later.";
+		responseColor.value = "red";
+	}
 };
 
 const handleServiceToggle = (item) => {
