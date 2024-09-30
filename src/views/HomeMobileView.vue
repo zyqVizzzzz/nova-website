@@ -131,7 +131,7 @@
 			<p>Partners</p>
 		</div>
 		<div class="nova-devide"></div>
-		<Vue3Marquee :duration="20" :delay="0" direction="left" :repeat="5">
+		<Vue3Marquee :duration="20" :delay="0" direction="left">
 			<div class="nova-partners_group">
 				<div class="group-item" v-for="item in partnerList">
 					<div
